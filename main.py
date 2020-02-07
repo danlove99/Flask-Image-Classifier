@@ -20,19 +20,19 @@ def allowed_file(filename):
 
 
 def predict(file):
-    	# load an image from file
+    	# load an image file
 	image = load_img(file, target_size=(224, 224))
-	# convert the image pixels to a numpy array
+	# convert to a numpy array
 	image = img_to_array(image)
-	# reshape data for the model
+	# reshape 
 	image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
-	# prepare the image for the VGG model
+	# prepare the image for model
 	image = preprocess_input(image)
-	# predict the probability across all output classes
+	# predict probability of class
 	yhat = model.predict(image)
-	# convert the probabilities to class labels
+	# class labels
 	label = decode_predictions(yhat)
-	# retrieve the most likely result, e.g. highest probability
+	# get highest probability
 	label = label[0][0]
 	result = '%s (%.2f%%)' % (label[1], label[2]*100)
 	return result
